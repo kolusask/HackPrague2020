@@ -9,7 +9,9 @@ from flask import request as fr
 
 import os
 
-client = gm.Client(key=os.environ.get('GMAPS_API_KEY'))
+
+api_key = os.getenv('GMAPS_API_KEY')
+client = gm.Client(key=api_key)
 
 graph = nx.Graph()
 

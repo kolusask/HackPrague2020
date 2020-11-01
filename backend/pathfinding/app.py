@@ -1,8 +1,11 @@
+import gmaps
 import googlemaps as gm
 from datetime import datetime
 
 import itertools
 import networkx as nx
+from ipywidgets.embed import embed_minimal_html
+from io import StringIO
 
 from flask import Flask, url_for
 from flask import request as fr
@@ -65,12 +68,16 @@ app.config['DEBUG'] = True
 @app.route('/place_addresses', methods=['POST'])
 def place_addresses():
     addr = fr.get_json()['addr']
-    print(addr)
     for a, b, e, p in addr:
         add_node(graph, a, b, e, p)
-    from pprint import pprint
-    pprint(graph.nodes(data=True))
-    return 'OK'
+    addresses = [a[0] for a in addr]
+    coords = [graph.nodes(data=True)[a]['coords'] for a in addresses]
+    strio = StringIO()
+    fig = gmaps.figure()
+    markers = gmaps.marker_layer(coords)
+    fig.add_layer(markers)
+    embed_minimal_html(strio, views=[fig])
+    return strio.getvalue()
 
 @app.route('/remove', methods=['POST'])
 def remove():
@@ -88,6 +95,5 @@ def get_path():
     dur = fr.json['dur']
     wt = fr.json['wt']
     return str(find_path(spos, stime, dur, wt))
-
 
 app.run(host="0.0.0.0", port=8080)

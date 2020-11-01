@@ -6,7 +6,7 @@ app = Flask(__name__)
 nltk.download('stopwords') 
      
 
-@app.route('/api/addReview',methods = ['POST'])
+@app.route('/api/checkReview',methods = ['POST'])
 def post_review():
     str(request)
     text = request.json['text']

@@ -38,8 +38,6 @@ public class CustomerService {
         entity.isFreelancer = customer.isFreelancer;
         entity.firstName = customer.firstName;
         entity.lastName = customer.lastName;
-        entity.Reviewee = customer.Reviewee;
-        entity.Reviewer = customer.Reviewer;
 
         return entity;
     }

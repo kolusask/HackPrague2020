@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+    pathfinding:
+        build: ./backend/pathfinding
+        env_file: ./backend/pathfinding/env.txt
+        ports:
+            - "8080:8080"
+    rest_review:
+        image: ryabuily/rest-review:1.0-SNAPSHOT
+    rest_projects:
+        image: ryabuily/rest-projects:1.0-SNAPSHOT
+    rest_orders:
+        image: ryabuily/rest-orders:1.0-SNAPSHOT
+    rest_user:
+        image: ryabuily/rest-user:1.0-SNAPSHOT
+volumes:
+    logvolume01: {}

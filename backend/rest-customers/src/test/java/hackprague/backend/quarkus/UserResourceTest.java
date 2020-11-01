@@ -9,13 +9,5 @@ import static org.hamcrest.CoreMatchers.is;
 @QuarkusTest
 public class UserResourceTest {
 
-    @Test
-    public void testHelloEndpoint() {
-        given()
-          .when().get("/api/user")
-          .then()
-             .statusCode(200)
-             .body(is("hello"));
-    }
-
+    
 }
